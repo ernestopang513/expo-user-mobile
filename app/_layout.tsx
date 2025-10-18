@@ -18,7 +18,7 @@ export default function RootLayout() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false, title: '' }} />
+        <Stack.Screen name='(user-movil-app)/(tabs)' options={{ headerShown: false, title: '' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

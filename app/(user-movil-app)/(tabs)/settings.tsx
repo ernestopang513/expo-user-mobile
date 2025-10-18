@@ -1,9 +1,10 @@
-import { Text, View } from 'react-native'
-const Settings = () => {
+import { ThemedView } from '@/presentation/theme/components/themed-view'
+import { Text } from 'react-native'
+const SettingsScreen = () => {
   return (
-    <View>
-      <Text>Settings</Text>
-    </View>
+    <ThemedView safe>
+      <Text>SettingsScreen</Text>
+    </ThemedView>
   )
 }
-export default Settings
+export default SettingsScreen
