@@ -1,11 +1,12 @@
-import { Text, View } from 'react-native'
+import { ThemedView } from '@/presentation/theme/components/themed-view'
+import { Text } from 'react-native'
 
 
 const HomeScreen = () => {
   return (
-    <View>
+    <ThemedView safe>
       <Text>HomeScreen</Text>
-    </View>
+    </ThemedView>
   )
 }
 export default HomeScreen
