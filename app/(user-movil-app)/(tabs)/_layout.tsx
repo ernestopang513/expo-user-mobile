@@ -17,7 +17,7 @@ const TabLayout = () => {
         name='home'
         options={{
           title: 'Home',
-          tabBarIcon: ({color}) => <Ionicons size={28} name='home-outline' color={color} />
+          tabBarIcon: ({color, focused}) => <Ionicons size={28} name={focused?'home':'home-outline'} color={color} />
         }}
       />
       
@@ -25,7 +25,7 @@ const TabLayout = () => {
         name='settings'
         options={{
           title: 'Settings',
-          tabBarIcon: ({color}) => <Ionicons size={28} name='person-outline' color={color} />
+          tabBarIcon: ({color, focused}) => <Ionicons size={28} name={focused?'person':'person-outline'} color={color} />
         }}
       />
       
