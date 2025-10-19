@@ -1,9 +1,18 @@
 import { SecureStorageAdapter } from '@/helpers/adapter/secure-storage.adapter';
 import axios from 'axios';
+import { Platform } from 'react-native';
 
+const STAGE = process.env.EXPO_PUBLIC_STAGE || 'dev';
+
+export const API_URL = 
+    (STAGE === 'prod')
+        ? process.env.EXPO_PUBLIC_API_URL
+        : (Platform.OS) === 'ios'
+            ? process.env.EXPO_PUBLIC_API_URL_IOS
+            : process.env.EXPO_PUBLIC_API_URL_ANDROID;
 
 const platformApi = axios.create({
-    baseURL: 'http://192.168.1.113:8080'
+    baseURL: API_URL
 });
 
 platformApi.interceptors.request.use(async (config) => {
