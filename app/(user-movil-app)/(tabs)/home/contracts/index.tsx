@@ -1,8 +1,10 @@
+import { useAuthStore } from '@/presentation/auth/store/useAuthStore'
 import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color'
 import { Link } from 'expo-router'
 import { Pressable, Text, View } from 'react-native'
 const ContractsScreen = () => {
     const iconColor = useThemeColor({}, 'icon')
+    const status = useAuthStore(state => state.status);
     return (
         <View>
             <Text>ContractsScreen</Text>
@@ -12,6 +14,9 @@ const ContractsScreen = () => {
                     <Text >Contract id</Text>
                 </Pressable>
             </Link>
+
+            <Text>{status}</Text>
+            
 
         </View>
     )

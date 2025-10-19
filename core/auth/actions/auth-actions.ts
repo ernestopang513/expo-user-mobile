@@ -38,7 +38,9 @@ export const authLogin = async(username: string, password: string) => {
 export const authCheckStatus = async () => {
     try {
         const {data} = await platformApi.get<AuthResponse>('/check-status')
+        return returnUserToken(data)
     } catch (error) {
-        throw error
+        console.log('error');
+        return null
     }
 }
