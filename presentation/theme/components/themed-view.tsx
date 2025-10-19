@@ -7,9 +7,10 @@ export type ThemedViewProps = ViewProps & {
   lightColor?: string;
   darkColor?: string;
   safe?: boolean;
+  margin?: boolean;
 };
 
-export function ThemedView({ safe = false, style, lightColor, darkColor, ...otherProps }: ThemedViewProps) {
+export function ThemedView({ margin = false, safe = false, style, lightColor, darkColor, ...otherProps }: ThemedViewProps) {
   const safeArea = useSafeAreaInsets();
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
@@ -18,6 +19,7 @@ export function ThemedView({ safe = false, style, lightColor, darkColor, ...othe
       style={[
         {
           backgroundColor,
+          marginHorizontal: margin? 10 : 0 ,
           flex:1,
           paddingTop: safe ? safeArea.top : 0,
 

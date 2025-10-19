@@ -35,7 +35,6 @@ const CheckAuthenticationLayout = () => {
   }
 
   return (
-    <ThemedView>
 
       <Stack
         screenOptions={{
@@ -49,7 +48,6 @@ const CheckAuthenticationLayout = () => {
           name='(tabs)'
         />
       </Stack>
-    </ThemedView>
   )
 }
 export default CheckAuthenticationLayout

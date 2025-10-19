@@ -7,7 +7,7 @@ const ContractsScreen = () => {
     const iconColor = useThemeColor({}, 'icon')
     const status = useAuthStore(state => state.status);
     return (
-        <ThemedView style = {{marginHorizontal: 20}}>
+        <ThemedView style = {{marginHorizontal: 10}}>
             <Text>ContractsScreen</Text>
 
             <Link href='/(user-movil-app)/(tabs)/home/contracts/3' asChild>

@@ -1,5 +1,3 @@
-import { Colors } from '@/constants/theme'
-import { ThemedView } from '@/presentation/theme/components/themed-view'
 import { useColorScheme } from '@/presentation/theme/hooks/use-color-scheme.web'
 import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color'
 import { Ionicons } from '@expo/vector-icons'
@@ -9,12 +7,13 @@ import { Tabs } from 'expo-router'
 const TabLayout = () => {
   const colorScheme = useColorScheme();
   const backgroundColor = useThemeColor({}, 'background');
+  const primaryColor = useThemeColor({}, 'primary') 
   return (
-    <ThemedView>
 
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+          // tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+          tabBarActiveTintColor: colorScheme === 'dark' ? 'white' : primaryColor,
           headerShown: false,
           //! SUPER importante para el color interno de la transisión
           sceneStyle: {
@@ -39,7 +38,6 @@ const TabLayout = () => {
         />
 
       </Tabs>
-    </ThemedView>
   )
 }
 export default TabLayout
