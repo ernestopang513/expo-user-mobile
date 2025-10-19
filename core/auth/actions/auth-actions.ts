@@ -40,7 +40,6 @@ export const authCheckStatus = async () => {
         const {data} = await platformApi.get<AuthResponse>('/check-status')
         return returnUserToken(data)
     } catch (error) {
-        console.log('error');
-        return null
+        throw error
     }
 }

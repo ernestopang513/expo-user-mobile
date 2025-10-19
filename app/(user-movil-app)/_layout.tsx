@@ -1,46 +1,55 @@
 import { useAuthStore } from '@/presentation/auth/store/useAuthStore';
+import { ThemedView } from '@/presentation/theme/components/themed-view';
+import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color';
 import { Redirect, Stack } from 'expo-router';
 import { useEffect } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 const CheckAuthenticationLayout = () => {
 
-  const status  = useAuthStore(state => state.status);
-  const checkStatus  = useAuthStore(state => state.checkStatus);
+  const status = useAuthStore(state => state.status);
+  const checkStatus = useAuthStore(state => state.checkStatus);
+  const backgroundColor = useThemeColor({}, 'background');
 
   useEffect(() => {
     checkStatus();
   }, [])
-  
-  
+
+
   if (status === 'checking') {
     return (
-      <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 5,
-      }}
+      <ThemedView
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginBottom: 5,
+        }}
       >
         <ActivityIndicator />
-      </View>
+      </ThemedView>
     );
   }
-  
+
   if (status === 'unauthenticated') {
     return <Redirect href="/auth/login" />;
   }
 
   return (
-    <Stack
+    <ThemedView>
+
+      <Stack
         screenOptions={{
-            headerShown: false
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: backgroundColor,
+          }
         }}
-    >
-      <Stack.Screen
-        name='(tabs)/home'
-      />
-    </Stack>
+      >
+        <Stack.Screen
+          name='(tabs)'
+        />
+      </Stack>
+    </ThemedView>
   )
 }
 export default CheckAuthenticationLayout

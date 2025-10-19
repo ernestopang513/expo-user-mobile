@@ -1,7 +1,22 @@
-import { Stack } from 'expo-router'
+import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color';
+import { Stack } from 'expo-router';
 const HomeLayout = () => {
+  const backgroundColor = useThemeColor({}, 'background');
   return (
-    <Stack initialRouteName='contracts/index'>
+    <Stack 
+      screenOptions={{
+        headerShadowVisible: false,
+        headerStyle: {
+          backgroundColor: backgroundColor,
+          
+        },
+        contentStyle: {
+          backgroundColor,
+        }
+      }}
+      initialRouteName='contracts/index'
+      
+      >
       <Stack.Screen
         name='contracts/index'
         options={{

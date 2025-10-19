@@ -1,11 +1,12 @@
-import { Text, View } from 'react-native'
+import { ThemedView } from '@/presentation/theme/components/themed-view'
+import { Text } from 'react-native'
 const InvoiceScreen = () => {
    
     return (
-        <View>
+        <ThemedView>
             <Text>InvoiceScreen</Text>
           
-        </View>
+        </ThemedView>
     )
 }
 export default InvoiceScreen
