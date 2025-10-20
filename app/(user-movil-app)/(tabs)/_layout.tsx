@@ -1,4 +1,5 @@
 import LogoutIconButton from '@/presentation/auth/components/LogoutIconButton'
+import { useAuthStore } from '@/presentation/auth/store/useAuthStore'
 import { useColorScheme } from '@/presentation/theme/hooks/use-color-scheme.web'
 import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color'
 import { Ionicons } from '@expo/vector-icons'
@@ -7,6 +8,7 @@ import { Tabs } from 'expo-router'
 
 const TabLayout = () => {
   const colorScheme = useColorScheme();
+  const user = useAuthStore(state => state.user);
   const backgroundColor = useThemeColor({}, 'background');
   const primaryColor = useThemeColor({}, 'primary') 
   return (
@@ -33,10 +35,11 @@ const TabLayout = () => {
         <Tabs.Screen
           name='settings'
           options={{
-            title: 'Settings',
+            title: 'Profile',
             tabBarIcon: ({ color, focused }) => <Ionicons size={28} name={focused ? 'person' : 'person-outline'} color={color} />,
             headerRight: () => <LogoutIconButton/>,
             headerShown: true,
+            headerTitle: user?.username ?? 'User',
             headerShadowVisible: false,
             headerStyle: {
               backgroundColor: backgroundColor
