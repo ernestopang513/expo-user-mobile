@@ -1,4 +1,4 @@
-import { platformApi } from "../api/platformApi";
+import { platformApi } from "../../api/platformApi";
 import { AuthResponse, User } from "../interface/user.interface";
 
 
