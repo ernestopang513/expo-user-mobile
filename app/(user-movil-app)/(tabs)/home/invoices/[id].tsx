@@ -1,10 +1,10 @@
+import { ThemedText } from '@/presentation/theme/components/themed-text'
 import { ThemedView } from '@/presentation/theme/components/themed-view'
-import { Text } from 'react-native'
 const InvoiceScreen = () => {
    
     return (
         <ThemedView>
-            <Text>InvoiceScreen</Text>
+            <ThemedText>InvoiceScreen</ThemedText>
           
         </ThemedView>
     )

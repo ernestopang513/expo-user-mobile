@@ -1,25 +1,38 @@
 import { useAuthStore } from '@/presentation/auth/store/useAuthStore'
-import { ThemedView } from '@/presentation/theme/components/themed-view'
+import { ThemedText } from '@/presentation/theme/components/themed-text'
 import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color'
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { Link } from 'expo-router'
-import { Pressable, Text } from 'react-native'
+import { Pressable, ScrollView, View } from 'react-native'
 const ContractsScreen = () => {
     const iconColor = useThemeColor({}, 'icon')
     const status = useAuthStore(state => state.status);
+    const tabBarHeight = useBottomTabBarHeight();
     return (
-        <ThemedView style = {{marginHorizontal: 10}}>
-            <Text>ContractsScreen</Text>
+        <ScrollView style = {{}}
+            contentContainerStyle = {{
+                paddingHorizontal: 10,
+                paddingBottom: tabBarHeight + 30
+            }}
+        >
+            <ThemedText>ContractsScreen</ThemedText>
 
             <Link href='/(user-movil-app)/(tabs)/home/contracts/3' asChild>
                 <Pressable style={{backgroundColor: iconColor, width: 200, padding: 12}}>
-                    <Text >Contract id</Text>
+                    <ThemedText >Contract id</ThemedText>
                 </Pressable>
             </Link>
 
-            <Text>{status}</Text>
+            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
+            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
+            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
+            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
+            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
+
+            <ThemedText>{status}</ThemedText>
             
 
-        </ThemedView>
+        </ScrollView>
     )
 }
 export default ContractsScreen
