@@ -1,3 +1,4 @@
+import LogoutIconButton from '@/presentation/auth/components/LogoutIconButton'
 import { useColorScheme } from '@/presentation/theme/hooks/use-color-scheme.web'
 import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color'
 import { Ionicons } from '@expo/vector-icons'
@@ -33,7 +34,13 @@ const TabLayout = () => {
           name='settings'
           options={{
             title: 'Settings',
-            tabBarIcon: ({ color, focused }) => <Ionicons size={28} name={focused ? 'person' : 'person-outline'} color={color} />
+            tabBarIcon: ({ color, focused }) => <Ionicons size={28} name={focused ? 'person' : 'person-outline'} color={color} />,
+            headerRight: () => <LogoutIconButton/>,
+            headerShown: true,
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: backgroundColor
+            }
           }}
         />
 

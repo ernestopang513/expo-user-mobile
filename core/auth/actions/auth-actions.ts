@@ -30,7 +30,8 @@ export const authLogin = async(username: string, password: string) => {
 
         return returnUserToken(data)
     } catch (error) {
-        throw error;
+        console.log(error);
+        return null;
     }
 
 }
