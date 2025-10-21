@@ -1,38 +1,49 @@
-import { useAuthStore } from '@/presentation/auth/store/useAuthStore'
-import { ThemedText } from '@/presentation/theme/components/themed-text'
-import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color'
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
-import { Link } from 'expo-router'
-import { Pressable, ScrollView, View } from 'react-native'
+import { useAuthStore } from '@/presentation/auth/store/useAuthStore';
+import { useContracts } from '@/presentation/contracts/hooks/useContracts';
+import SkeletonCard from '@/presentation/theme/components/SkeletonCard';
+import { ThemedText } from '@/presentation/theme/components/themed-text';
+import { ThemedView } from '@/presentation/theme/components/themed-view';
+import { FlatList } from 'react-native';
 const ContractsScreen = () => {
-    const iconColor = useThemeColor({}, 'icon')
-    const status = useAuthStore(state => state.status);
-    const tabBarHeight = useBottomTabBarHeight();
+
+    const user = useAuthStore(state => state.user);
+
+    const {contractsQuery} = useContracts(`${user?.id}`);
+
     return (
-        <ScrollView style = {{}}
-            contentContainerStyle = {{
-                paddingHorizontal: 10,
-                paddingBottom: tabBarHeight + 30
-            }}
-        >
-            <ThemedText>ContractsScreen</ThemedText>
 
-            <Link href='/(user-movil-app)/(tabs)/home/contracts/3' asChild>
-                <Pressable style={{backgroundColor: iconColor, width: 200, padding: 12}}>
-                    <ThemedText >Contract id</ThemedText>
-                </Pressable>
-            </Link>
+             <FlatList
+                contentContainerStyle = {{
+                    paddingHorizontal: 10,
+                    paddingBottom: 30
+                }}
+                data={contractsQuery.data}
+                keyExtractor={(item) => `${item.id}`}
+                renderItem={({item}) => {
+                    return (
+                        <ThemedView>
+                            <ThemedText>Contrato</ThemedText>
+                            <ThemedText>Status: {item.status}</ThemedText>
+                            {/* <ThemedText>Id: {item.id}</ThemedText> */}
+                            <ThemedText>Servicio: {item.serviceName}</ThemedText>
+                            <ThemedText>Cliente: {item.userFullName}</ThemedText>
+                            <ThemedText>Price: {item.servicePrice}</ThemedText>
+                            <ThemedText>Fecha de contraración: {item.startDate}</ThemedText>
+                        </ThemedView>
+                    )
+                }}
+                
+                ListEmptyComponent={
+                    contractsQuery.isLoading
+                    ? <SkeletonCard/>
+                    : <ThemedView>
+                        <ThemedText type='defaultSemiBold' style ={{fontFamily: 'KanitRegural'}} >Sin pendientes</ThemedText>
+                    </ThemedView>
+                }
+                refreshing={contractsQuery.isRefetching}
+                onRefresh={contractsQuery.refetch}
+             />
 
-            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
-            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
-            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
-            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
-            <View style ={{height: 200, backgroundColor: 'green', marginVertical: 25}} />
-
-            <ThemedText>{status}</ThemedText>
-            
-
-        </ScrollView>
     )
 }
 export default ContractsScreen

@@ -3,12 +3,13 @@ import { useAuthStore } from '@/presentation/auth/store/useAuthStore'
 import { useColorScheme } from '@/presentation/theme/hooks/use-color-scheme.web'
 import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color'
 import { Ionicons } from '@expo/vector-icons'
-import { BlurView } from 'expo-blur'
 import { Tabs } from 'expo-router'
 import { useWindowDimensions } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const TabLayout = () => {
   const colorScheme = useColorScheme()
+  const {bottom} = useSafeAreaInsets();
   const user = useAuthStore(state => state.user)
   const backgroundColor = useThemeColor({}, 'background')
   const primaryColor = useThemeColor({}, 'primary')
@@ -22,31 +23,31 @@ const TabLayout = () => {
         sceneStyle: {
           backgroundColor: backgroundColor,
         },
-        //  Estilos TabBar flotante
-        tabBarStyle: {
-          position: 'absolute',
-          bottom: 20,
-          // transform: [{ translateX: (width * 0.5) / 2 }],
-          transform: [{ translateX: (width - width * 0.7) / 2 }],
-          // left: 20,
-          // right: 20,
-          elevation: 0,
-          height: 50,
-          width: width * 0.7 ,
-          borderRadius: 25,
-          borderCurve: 'continuous',
-          backgroundColor: colorScheme === 'dark' ?'rgba(255, 255, 255, 0.15)':' rgba(51, 102, 255, 0.4)', 
-          borderWidth: 1,
-          borderColor: 'rgba(255, 255, 255, 0.3)',
-          overflow: 'hidden',
-        },
-        tabBarBackground: () => (
-          <BlurView
-            intensity={100}
-            tint={colorScheme === 'dark' ? 'dark' : 'light'}
-            style={{ flex:1 }}
-          />
-        ),
+        // //  Estilos TabBar flotante
+        // tabBarStyle: {
+        //   position: 'absolute',
+        //   bottom: bottom,
+        //   // transform: [{ translateX: (width * 0.5) / 2 }],
+        //   transform: [{ translateX: (width - width * 0.7) / 2 }],
+        //   // left: 20,
+        //   // right: 20,
+        //   elevation: 0,
+        //   height: 70,
+        //   width: width * 0.7 ,
+        //   borderRadius: 25,
+        //   borderCurve: 'continuous',
+        //   backgroundColor: colorScheme === 'dark' ?'rgba(255, 255, 255, 0.15)':' rgba(51, 102, 255, 0.4)', 
+        //   borderWidth: 1,
+        //   borderColor: 'rgba(255, 255, 255, 0.3)',
+        //   overflow: 'hidden',
+        // },
+        // tabBarBackground: () => (
+        //   <BlurView
+        //     intensity={100}
+        //     tint={colorScheme === 'dark' ? 'dark' : 'light'}
+        //     style={{ flex:1 }}
+        //   />
+        // ),
       }}
     >
       <Tabs.Screen
