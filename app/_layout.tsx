@@ -7,6 +7,7 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
+import { useSystemTheme } from '../presentation/theme/hooks/useSystemTheme';
 
 // export const unstable_settings = {
 //   anchor: '(tabs)',
@@ -16,6 +17,7 @@ const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  useSystemTheme();
   const backgroudColor = useThemeColor({}, 'background');
   const [loaded] = useFonts({
     KanitRegural: require('../assets/fonts/Kanit-Regular.ttf'),
@@ -26,6 +28,8 @@ export default function RootLayout() {
   if (!loaded) {
     return null
   }
+
+  
 
   return (
     <QueryClientProvider client={queryClient}>

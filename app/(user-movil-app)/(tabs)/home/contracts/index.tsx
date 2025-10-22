@@ -3,47 +3,89 @@ import { useContracts } from '@/presentation/contracts/hooks/useContracts';
 import SkeletonCard from '@/presentation/theme/components/SkeletonCard';
 import { ThemedText } from '@/presentation/theme/components/themed-text';
 import { ThemedView } from '@/presentation/theme/components/themed-view';
-import { FlatList } from 'react-native';
+import { router } from 'expo-router';
+import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 const ContractsScreen = () => {
 
     const user = useAuthStore(state => state.user);
 
-    const {contractsQuery} = useContracts(`${user?.id}`);
+    const { contractsQuery } = useContracts(`${user?.id}`);
 
     return (
 
-             <FlatList
-                contentContainerStyle = {{
-                    paddingHorizontal: 10,
-                    paddingBottom: 30
-                }}
-                data={contractsQuery.data}
-                keyExtractor={(item) => `${item.id}`}
-                renderItem={({item}) => {
-                    return (
-                        <ThemedView>
-                            <ThemedText>Contrato</ThemedText>
-                            <ThemedText>Status: {item.status}</ThemedText>
-                            {/* <ThemedText>Id: {item.id}</ThemedText> */}
-                            <ThemedText>Servicio: {item.serviceName}</ThemedText>
-                            <ThemedText>Cliente: {item.userFullName}</ThemedText>
-                            <ThemedText>Price: {item.servicePrice}</ThemedText>
-                            <ThemedText>Fecha de contraración: {item.startDate}</ThemedText>
+        <FlatList
+            contentContainerStyle={{
+                paddingHorizontal: 10,
+                paddingBottom: 30,
+                gap: 20
+            }}
+            data={contractsQuery.data}
+            keyExtractor={(item) => `${item.id}`}
+            renderItem={({ item }) => {
+                return (
+                    <TouchableOpacity
+                        onPress={() => router.push(`/(user-movil-app)/(tabs)/home/contracts/${item.id}`)}
+                    >
+
+                        <ThemedView level={2} style={{
+                            padding: 10,
+                            borderWidth: 0.5,
+                            borderRadius: 10,
+                            paddingVertical: 10,
+                            gap: 20
+
+                        }}>
+                            <ThemedText type='subtitle'>Contrato</ThemedText>
+                            <ThemedView level={3} style={styles.infoStyles} >
+                                <ThemedText>Status:</ThemedText>
+                                <ThemedText>{item.status}</ThemedText>
+                            </ThemedView>
+                            <ThemedView level={3} style={styles.infoStyles} >
+                                <ThemedText>Servicio:</ThemedText>
+                                <ThemedText>{item.serviceName}</ThemedText>
+                            </ThemedView>
+                            {/* <ThemedView level={3} style={styles.infoStyles} >
+                                <ThemedText>Cliente:</ThemedText>
+                                <ThemedText>{item.userFullName}</ThemedText>
+                            </ThemedView> */}
+                            {/* <ThemedView level={3} style={styles.infoStyles} >
+                                <ThemedText>Price:</ThemedText>
+                                <ThemedText>${item.servicePrice}</ThemedText>
+                            </ThemedView> */}
+                            {/* <ThemedView level={3} style={styles.infoStyles} >
+                                <ThemedText>Fecha de contratación:</ThemedText>
+                                <ThemedText>{item.startDate}</ThemedText>
+                            </ThemedView> */}
+                            {/* <ThemedView level={3} style={styles.infoStyles} >
+                                <ThemedText>Fecha de termino:</ThemedText>
+                                <ThemedText>{item.endDate}</ThemedText>
+                            </ThemedView> */}
                         </ThemedView>
-                    )
-                }}
-                
-                ListEmptyComponent={
-                    contractsQuery.isLoading
-                    ? <SkeletonCard/>
+                    </TouchableOpacity>
+                )
+            }}
+
+            ListEmptyComponent={
+                contractsQuery.isLoading
+                    ? <SkeletonCard />
                     : <ThemedView>
-                        <ThemedText type='defaultSemiBold' style ={{fontFamily: 'KanitRegural'}} >Sin pendientes</ThemedText>
+                        <ThemedText type='defaultSemiBold' style={{ fontFamily: 'KanitRegural' }} >Sin pendientes</ThemedText>
                     </ThemedView>
-                }
-                refreshing={contractsQuery.isRefetching}
-                onRefresh={contractsQuery.refetch}
-             />
+            }
+            refreshing={contractsQuery.isRefetching}
+            onRefresh={contractsQuery.refetch}
+        />
 
     )
 }
 export default ContractsScreen
+
+const styles = StyleSheet.create({
+    infoStyles: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+    }
+})

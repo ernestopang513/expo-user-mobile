@@ -26,7 +26,8 @@ const HomeLayout = () => {
       <Stack.Screen
         name='contracts/[id]'
         options={{
-            title: 'Contrato: id'
+            title: '',
+            presentation: 'modal'
         }}
       />
       <Stack.Screen
