@@ -53,7 +53,6 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       get().changeStatus(resp?.token, resp?.user);
       
     } catch (error) {
-      console.log('Ubo un error');
       get().changeStatus();
     }
   },

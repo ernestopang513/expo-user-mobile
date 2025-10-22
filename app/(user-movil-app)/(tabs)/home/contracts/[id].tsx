@@ -53,7 +53,10 @@ const ContractScreen = () => {
           </ThemedView>
           <ThemedButton 
             style = {{paddingVertical: 10}}
-            onPress={() => router.push(`/(user-movil-app)/(tabs)/home/invoices/${item.id}`)}  
+            onPress={() => router.push({
+              pathname:`/(user-movil-app)/(tabs)/home/invoices/[invoiceId]`,
+              params: {invoiceId: item.id, contractId: contractQuery.data?.id}
+            })}  
           >Detalle</ThemedButton>
         </ThemedView>
       )}

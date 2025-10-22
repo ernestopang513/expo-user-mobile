@@ -1,5 +1,5 @@
-import { getInvoicesByContractId } from "@/core/invoices/get-invoices-by-contract-id"
-import { useQuery } from "@tanstack/react-query"
+import { getInvoicesByContractId } from "@/core/invoices/actions/get-invoices-by-contract-id";
+import { useQuery } from "@tanstack/react-query";
 
 
 

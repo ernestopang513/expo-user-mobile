@@ -4,12 +4,24 @@ import SkeletonCard from '@/presentation/theme/components/SkeletonCard';
 import { ThemedText } from '@/presentation/theme/components/themed-text';
 import { ThemedView } from '@/presentation/theme/components/themed-view';
 import { router } from 'expo-router';
+import { useState } from 'react';
 import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 const ContractsScreen = () => {
 
     const user = useAuthStore(state => state.user);
 
     const { contractsQuery } = useContracts(`${user?.id}`);
+
+    const [refreshing, setRefreshing] = useState(false);
+
+    const handleRefresh = async () => {
+        setRefreshing(true);
+        try {
+            await contractsQuery.refetch();
+        } finally { 
+            setRefreshing(false);
+        }
+    }
 
     return (
 
@@ -72,8 +84,8 @@ const ContractsScreen = () => {
                         <ThemedText type='defaultSemiBold' style={{ fontFamily: 'KanitRegural' }} >Sin pendientes</ThemedText>
                     </ThemedView>
             }
-            refreshing={contractsQuery.isRefetching}
-            onRefresh={contractsQuery.refetch}
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
         />
 
     )
