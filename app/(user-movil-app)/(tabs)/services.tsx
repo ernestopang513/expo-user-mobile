@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/presentation/auth/store/useAuthStore';
+import ServicesSvg from '@/presentation/services/components/ServicesSvg';
 import { useServices } from '@/presentation/services/hooks/useServices';
 import { ThemedText } from '@/presentation/theme/components/themed-text';
 import { ThemedView } from '@/presentation/theme/components/themed-view';
@@ -10,7 +11,7 @@ import { FlatList, Modal, Pressable, StyleSheet, TouchableOpacity, TouchableWith
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const services = () => {
     const { top } = useSafeAreaInsets();
-    const {height} = useWindowDimensions();
+    const {height, width} = useWindowDimensions();
     const { servicesQuery } = useServices();
     const { visible, openModal, closeModal } = useModal();
     const primary = useThemeColor({}, 'primary');
@@ -110,8 +111,10 @@ const services = () => {
                 >
                     <TouchableWithoutFeedback>
                         <View style={[styles.modalContainer, {marginTop: height * 0.7, backgroundColor: backgroundColor}]}>
-
+                              <ServicesSvg/>
+                            
                             <View style={{ justifyContent: 'space-between', flex: 1 }}>
+
 
                                 <View style={{
                                     paddingHorizontal: 20,
@@ -133,17 +136,19 @@ const services = () => {
                                     /> */}
                                     {/* <ThemedView style={{flex: 0}}> */}
                                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                        <ThemedText>Cliente:</ThemedText>
-                                        <ThemedText style={{fontFamily: 'KanitBold'}}>{user?.username}</ThemedText>
+                                        <ThemedText style={{color: 'white', fontFamily: 'KanitRegular'}}>Cliente:</ThemedText>
+                                        <ThemedText style={{fontFamily: 'KanitBold', color: 'white'}}>{user?.username}</ThemedText>
                                     </View>
                                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                        <ThemedText>Servicio a contratar:</ThemedText>
-                                        <ThemedText style={{fontFamily: 'KanitBold'}}>{selectedService.name}</ThemedText>
+                                        <ThemedText style={{color: 'white', fontFamily: 'KanitRegular'}}>Servicio a contratar:</ThemedText>
+                                        <ThemedText style={{fontFamily: 'KanitBold', color: 'white'}}>{selectedService.name}</ThemedText>
                                     </View>
                                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                        <ThemedText >Precio anual:</ThemedText>
-                                        <ThemedText style={{fontFamily: 'KanitBold'}}>{selectedService.price}</ThemedText>
+                                        <ThemedText  style={{color: 'white', fontFamily: 'KanitRegular'}}>Precio anual:</ThemedText>
+                                        <ThemedText style={{fontFamily: 'KanitBold', color: 'white'}}>{selectedService.price}</ThemedText>
                                     </View>
+
+
                                     {/* </ThemedView> */}
 
 
@@ -230,7 +235,7 @@ const styles = StyleSheet.create({
     },
     backDrop: {
         flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.15)'
+        backgroundColor: 'rgba(0,0,0,0.02)'
     },
     dishButtonSelected: {
         backgroundColor: '#d1ffe1',

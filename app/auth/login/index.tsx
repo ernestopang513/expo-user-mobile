@@ -1,3 +1,4 @@
+import LoginSVG from '@/presentation/auth/components/LoginSVG'
 import { useAuthStore } from '@/presentation/auth/store/useAuthStore'
 import { ThemedText } from '@/presentation/theme/components/themed-text'
 import ThemedButton from '@/presentation/theme/components/ThemedButton'
@@ -10,7 +11,7 @@ const LoginScreen = () => {
 
   const login = useAuthStore(state => state.login);
 
-  const { height } = useWindowDimensions();
+  const { height, width } = useWindowDimensions();
 
   const [isPosting, setIsPosting] = useState(false);
   const [form, setform] = useState({
@@ -48,10 +49,8 @@ const LoginScreen = () => {
     <KeyboardAvoidingView
       behavior='padding'
       style={{ flex: 1 }}
-      contentContainerStyle = {{
-        backgroundColor: 'red'
-      }}
     >
+      <LoginSVG/>
       <ScrollView
         contentContainerStyle={{ paddingHorizontal: 40 }}
         keyboardShouldPersistTaps = 'handled'
@@ -59,11 +58,11 @@ const LoginScreen = () => {
 
         {/* <ThemedView safe> */}
         <View style={{
-          paddingTop: height * 0.35
+          paddingTop: height * 0.25
         }}>
 
           <ThemedText type='title'>Ingresar</ThemedText>
-          <ThemedText style={{ color: 'grey' }}>Por favor ingrese para continuar</ThemedText>
+          <ThemedText style={{ color: 'grey', fontFamily: 'KanitThin'}}>Por favor ingrese para continuar</ThemedText>
         </View>
 
         <View style={{ marginTop: 20 }} >
@@ -107,8 +106,8 @@ const LoginScreen = () => {
             marginVertical: 20
           }}
         >
-          <ThemedText >¿No tienes cuenta?</ThemedText>
-          <ThemedLink href='/auth/register' style={{marginHorizontal: 5}} >Crear cuenta</ThemedLink>
+          <ThemedText style={{fontFamily: 'KanitRegular'}} >¿No tienes cuenta?</ThemedText>
+          <ThemedLink href='/auth/register' style={{marginHorizontal: 5, fontFamily: 'KanitBold', fontSize: 20}} >Crear cuenta</ThemedLink>
 
         </View>
 

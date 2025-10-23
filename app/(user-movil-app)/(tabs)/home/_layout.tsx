@@ -20,7 +20,8 @@ const HomeLayout = () => {
       <Stack.Screen
         name='contracts/index'
         options={{
-            title: 'Contratos'
+            title: 'Contratos',
+            headerShown: false
         }}
       />
       <Stack.Screen

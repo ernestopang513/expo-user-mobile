@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const ContractsScreen = () => {
 
     const user = useAuthStore(state => state.user);
@@ -16,6 +17,7 @@ const ContractsScreen = () => {
     const iconColor = useThemeColor({}, 'text');
     const primary = useThemeColor({}, 'primary');
     const [refreshing, setRefreshing] = useState(false);
+    const {top} = useSafeAreaInsets();
 
     const handleRefresh = async () => {
         setRefreshing(true);
@@ -30,9 +32,10 @@ const ContractsScreen = () => {
 
         <FlatList
             contentContainerStyle={{
-                paddingHorizontal: 10,
+                paddingHorizontal: 20,
                 paddingBottom: 30,
-                gap: 20
+                gap: 20,
+                paddingTop: top + 20
             }}
             data={contractsQuery.data}
             keyExtractor={(item) => `${item.id}`}
@@ -99,6 +102,11 @@ const ContractsScreen = () => {
                     : <ThemedView>
                         <ThemedText type='defaultSemiBold' style={{ fontFamily: 'KanitRegural' }} >Sin pendientes</ThemedText>
                     </ThemedView>
+            }
+            ListHeaderComponent={
+                <ThemedView>
+                    <ThemedText type='defaultSemiBold' style={{fontFamily: 'KanitBold', fontSize: 30}} >Contratos</ThemedText>
+                </ThemedView>
             }
             refreshing={refreshing}
             onRefresh={handleRefresh}

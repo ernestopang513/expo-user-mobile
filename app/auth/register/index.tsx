@@ -1,3 +1,4 @@
+import SinginSvg from '@/presentation/auth/components/SigninSvg'
 import { ThemedText } from '@/presentation/theme/components/themed-text'
 import ThemedButton from '@/presentation/theme/components/ThemedButton'
 import ThemedTextInput from '@/presentation/theme/components/ThemedTextInput'
@@ -14,6 +15,7 @@ const RegisterScreen = () => {
       behavior='padding'
       style={{ flex: 1 }}
     >
+      <SinginSvg/>
       <ScrollView
         contentContainerStyle={{ 
           paddingHorizontal: 40,
@@ -28,7 +30,7 @@ const RegisterScreen = () => {
         }}>
 
           <ThemedText type='title'>Registrar</ThemedText>
-          <ThemedText style={{ color: 'grey' }}>Por favor crea una cuenta para continuar</ThemedText>
+          <ThemedText style={{ color: 'grey', fontFamily: 'KanitThin' }}>Por favor crea una cuenta para continuar</ThemedText>
         </View>
 
         <View style={{ marginTop: 20 }} >
@@ -77,8 +79,8 @@ const RegisterScreen = () => {
             marginVertical: 20
           }}
         >
-          <ThemedText  >¿Ya tienes cuenta?</ThemedText>
-          <ThemedText type='defaultSemiBold' onPress={router.back} style={{marginHorizontal: 5, color: primaryColor}} >Ingresar</ThemedText>
+          <ThemedText style={{fontFamily: "KanitRegular"}} >¿Ya tienes cuenta?</ThemedText>
+          <ThemedText type='defaultSemiBold' onPress={router.back} style={{marginHorizontal: 5, color: primaryColor, fontFamily: 'KanitBold', fontSize: 20}} >Ingresar</ThemedText>
 
         </View>
 
