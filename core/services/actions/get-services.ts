@@ -5,7 +5,7 @@ import { ServiceResponse } from "../interfaces/service";
 
 export const getServices = async(): Promise<ServiceResponse[]> => {
     try {
-        const {data} = await platformApi.get<ServiceResponse[]>('/api/services');
+        const {data} = await platformApi.get<ServiceResponse[]>('/api/services?active=true');
         return data;
     } catch (error) {
         log("Get services", error);
