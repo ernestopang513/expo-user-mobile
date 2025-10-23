@@ -20,7 +20,7 @@ export default function RootLayout() {
   useSystemTheme();
   const backgroudColor = useThemeColor({}, 'background');
   const [loaded] = useFonts({
-    KanitRegural: require('../assets/fonts/Kanit-Regular.ttf'),
+    KanitRegular: require('../assets/fonts/Kanit-Regular.ttf'),
     KanitBold: require('../assets/fonts/Kanit-Bold.ttf'),
     KanitThin: require('../assets/fonts/Kanit-Thin.ttf'),
   })

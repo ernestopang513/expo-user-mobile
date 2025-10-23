@@ -26,13 +26,13 @@ const TabLayout = () => {
         // //  Estilos TabBar flotante
         // tabBarStyle: {
         //   position: 'absolute',
-        //   bottom: bottom,
+        //   bottom: bottom + 30,
         //   // transform: [{ translateX: (width * 0.5) / 2 }],
         //   transform: [{ translateX: (width - width * 0.7) / 2 }],
         //   // left: 20,
         //   // right: 20,
         //   elevation: 0,
-        //   height: 70,
+        //   height: 49,
         //   width: width * 0.7 ,
         //   borderRadius: 25,
         //   borderCurve: 'continuous',
@@ -50,15 +50,27 @@ const TabLayout = () => {
         // ),
       }}
     >
-      <Tabs.Screen
-        name='home'
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons size={26} name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
+
+        <Tabs.Screen
+          name='services'
+          options={{
+            title: 'Servicios',
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons size={26} name={focused ? 'briefcase' : 'briefcase-outline'} color={color} />
+            ),
+          }}
+        />
+
+          <Tabs.Screen
+            name='home'
+            options={{
+              title: 'Home',
+              tabBarIcon: ({ color, focused }) => (
+                <Ionicons size={26} name={focused ? 'home' : 'home-outline'} color={color} />
+              ),
+            }}
+          />
+
       <Tabs.Screen
         name='settings'
         options={{
@@ -72,7 +84,8 @@ const TabLayout = () => {
           headerShadowVisible: false,
           headerStyle: { backgroundColor },
         }}
-      />
+
+        />
     </Tabs>
   )
 }
