@@ -100,7 +100,7 @@ const ContractsScreen = () => {
                 contractsQuery.isLoading
                     ? <SkeletonCard />
                     : <ThemedView>
-                        <ThemedText type='defaultSemiBold' style={{ fontFamily: 'KanitRegural' }} >Sin pendientes</ThemedText>
+                        <ThemedText type='subtitle' style={{ fontFamily: 'KanitRegural' }} >Sin Contratos</ThemedText>
                     </ThemedView>
             }
             ListHeaderComponent={

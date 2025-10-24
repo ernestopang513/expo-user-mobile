@@ -69,6 +69,8 @@ const LoginScreen = () => {
           <ThemedText style={{ color: 'grey', fontFamily: 'KanitThin'}}>Por favor ingrese para continuar</ThemedText>
         </View>
 
+
+
         <View style={{ marginTop: 20 }} >
           <ThemedTextInput
             placeholder='Username'
