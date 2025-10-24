@@ -1,10 +1,12 @@
 import { useAuthStore } from '@/presentation/auth/store/useAuthStore';
+import { ServicesListImage } from '@/presentation/services/components/ServiceListImage';
 import ServicesSvg from '@/presentation/services/components/ServicesSvg';
 import { useServices } from '@/presentation/services/hooks/useServices';
 import { ThemedText } from '@/presentation/theme/components/themed-text';
 import { ThemedView } from '@/presentation/theme/components/themed-view';
 import ThemedButton from '@/presentation/theme/components/ThemedButton';
 import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color';
+import ConfirmationModal from '@/shared/components/ConfirmationModal';
 import { useModal } from '@/shared/hooks/useModal';
 import { useState } from 'react';
 import { FlatList, Modal, Pressable, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, useWindowDimensions, View } from 'react-native';
@@ -12,18 +14,19 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const services = () => {
     const { top } = useSafeAreaInsets();
     const {height, width} = useWindowDimensions();
-    const { servicesQuery } = useServices();
     const { visible, openModal, closeModal } = useModal();
     const primary = useThemeColor({}, 'primary');
     const backgroundColor = useThemeColor({}, 'background');
     const user = useAuthStore(state=> state.user);
-
+    const [shownConfirm, setShownConfirm] = useState(false);
+    
     const [selectedService, setSelectedService] = useState({
         name: '',
         id: '',
         price: '',
     });
-
+    
+    const { servicesQuery, servicesMutate } = useServices(`${user?.id}`, selectedService.id);
 
     return (
         <>
@@ -50,15 +53,19 @@ const services = () => {
                     <ThemedView
                         level={3}
                         style={{
-                            padding: 10,
+                            // padding: 10,
                             borderRadius: 10,
                             gap: 10,
-                            flexDirection: 'row', // Para poner la ola a un lado
-                            alignItems: 'stretch',
+                            // flexDirection: 'row', // Para poner la ola a un lado
+                            // alignItems: 'stretch',
+                            paddingLeft: 40
                         }}
+
+
+
                         >
                         {/* Ola lateral */}
-                        <View
+                        {/* <View
                             style={{
                                 width: 20, // grosor de la ola
                                 // backgroundColor: '#007BFF', // color azul o el que prefieras
@@ -67,10 +74,22 @@ const services = () => {
                                 borderBottomRightRadius: 40, // curvatura inferior
                                 marginRight: 8, // separación con el contenido
                             }}
-                        />
+
+
+
+                        /> */}
+
+                        {/* <View style={{
+                            width: 20
+                        }}> */}
+                            {/* <ServicesListSvg/> */}
+                            <ServicesListImage/>
+
+                        {/* </View> */}
+
 
                         {/* Contenido principal */}
-                        <View style={{ flex: 1, gap: 10 }}>
+                        <View style={{ flex: 1, gap: 10, padding: 10 }}>
                             <ThemedView level={4} style={styles.ServiceInfoStyles}>
                                 <ThemedText style={{ fontFamily: 'KanitRegular' }}>{item.name}</ThemedText>
                                 <ThemedText style={{ fontFamily: 'KanitBold' }}>${item.price}</ThemedText>
@@ -158,10 +177,12 @@ const services = () => {
                                 <ThemedButton
                                    
                                     onPress={() => {
-                                        closeModal();
+                                        setShownConfirm(true);
+                                        // servicesMutate.mutate();
+                                        // closeModal();
 
                                     }}
-
+                                    disabled ={ servicesMutate.isPending}
                                     icon='briefcase-outline'
 
                                 >
@@ -172,6 +193,24 @@ const services = () => {
                     </TouchableWithoutFeedback>
                 </Pressable>
             </Modal>
+
+            {
+                shownConfirm &&
+                <ConfirmationModal
+                    title='Confirmación'
+                    onCancel={() => {
+                        setShownConfirm(false);
+                        
+                    }}
+                    onAccepted={() => {
+                        servicesMutate.mutate();
+                        setShownConfirm(false);
+                        closeModal();
+                    }}
+                    disabled = {servicesMutate.isPending}
+                    loading={servicesMutate.isPending}
+                />
+            }
         </>
     )
 }

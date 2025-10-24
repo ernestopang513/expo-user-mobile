@@ -64,9 +64,9 @@ const TabLayout = () => {
           <Tabs.Screen
             name='home'
             options={{
-              title: 'Home',
+              title: 'Contractos',
               tabBarIcon: ({ color, focused }) => (
-                <Ionicons size={26} name={focused ? 'home' : 'home-outline'} color={color} />
+                <Ionicons size={26} name={focused ? 'document-text' : 'document-text-outline'} color={color} />
               ),
             }}
           />
@@ -80,7 +80,7 @@ const TabLayout = () => {
           ),
           headerShown: true,
           headerRight: () => <LogoutIconButton />,
-          headerTitle: user?.username ?? 'User',
+          // headerTitle: user?.username ?? 'User',
           headerShadowVisible: false,
           headerStyle: { backgroundColor },
         }}

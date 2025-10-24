@@ -40,7 +40,7 @@ const HomeLayout = () => {
       <Stack.Screen
         name='invoices/[invoiceId]'
         options={{
-            title: 'Factura: id'
+            title: 'Detalle'
         }}
       />
     </Stack>
